@@ -1,4 +1,4 @@
-class Minimongoid
+class @Minimongoid
   id: undefined
   attributes: {}
 
@@ -15,15 +15,15 @@ class Minimongoid
 
   save: ->
     return false unless @isValid()
-    
+
     attributes = @mongoize(@attributes)
     attributes['_type'] = @constructor._type if @constructor._type?
-    
+
     if @isPersisted()
       @constructor._collection.update @id, { $set: attributes }
     else
       @id = @constructor._collection.insert attributes
-    
+
     this
 
   update: (@attributes) ->
@@ -51,9 +51,6 @@ class Minimongoid
   @_collection: undefined
   @_type: undefined
 
-  # Rubists will love me, everyone else will burn me!
-  #
-  # Allows calls like User.new firstname: 'John'
   @new: (attributes) ->
     new @(attributes)
 
@@ -68,7 +65,6 @@ class Minimongoid
 
   @toArray: (selector = {}, options = {}) ->
     for attributes in @where(selector, options).fetch()
-      # eval is ok, because _type is never entered by user
       new(eval(attributes._type) ? @)(attributes)
 
   @count: (selector = {}, options = {}) ->
