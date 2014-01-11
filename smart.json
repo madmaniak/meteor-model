@@ -1,6 +1,6 @@
 {
   "name": "model",
-  "description": "Models for meteor",
+  "description": "Models for Mongo collections elements",
   "homepage": "https://github.com/madmaniak/meteor-model",
   "author": "Marek Piasecki  (http://mad.maniak.pro)",
   "version": "0.1.0",

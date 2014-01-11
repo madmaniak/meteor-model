@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "Models for Meteor"
+  summary: "Models for Mongo collections elements"
 });
 
 var both = ['client', 'server'];
