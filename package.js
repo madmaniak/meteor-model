@@ -2,7 +2,9 @@ Package.describe({
   summary: "Models for Mongo collections elements"
 });
 
-var both = ['client', 'server'];
+Npm.depends({
+  "inflection": "1.3.2"
+});
 
 Package.on_use(function (api) {
   api.use('coffeescript', both);

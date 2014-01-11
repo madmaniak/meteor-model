@@ -1,4 +1,4 @@
-class User extends Minimongoid
+class User extends Model
   @_collection: new Meteor.Collection 'minimongoid_tests'
 
   isValid: ->
