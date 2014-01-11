@@ -1,4 +1,4 @@
-class @Minimongoid
+class @Model
   id: undefined
   attributes: {}
 

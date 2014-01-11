@@ -1,0 +1,10 @@
+{
+  "name": "model",
+  "description": "Models for meteor",
+  "homepage": "https://github.com/madmaniak/meteor-model"
+  "author": "Marek Piasecki  (http://mad.maniak.pro)",
+  "version": "0.1.0",
+  "git": "https://github.com/madmaniak/meteor-model.git"
+  "packages": {
+  }
+}
