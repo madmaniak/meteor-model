@@ -1,18 +1,14 @@
 #minimongoid
 
-Mongoid inspired models. For your Meteor app. Kinda. Be sure to check out the [post](https://coderwall.com/p/_q9b1w) on my coderwall.
-
 ## Installation
 
-For now, download [minimongoid.coffee](https://github.com/haihappen/minimongoid/blob/master/minimongoid.coffee) and place it into your Meteor app. Dont forget to install the `coffeescript` package:
+Download [minimongoid.coffee](https://github.com/madmaniak/minimongoid/blob/master/minimongoid.coffee) and place it in ```lib/```into your Meteor app.
+
+Dont forget to install the `coffeescript` package:
 
 ```sh
 meteor add coffeescript
 ```
-
-### Wanna have a pure JavaScript version?
-
-Paste the content of [minimongoid.coffee](https://raw.github.com/haihappen/minimongoid/master/minimongoid.coffee) into [here](http://coffeescript.org/#try:%23%20Paste%20minimongoid.coffee%20into%20here!)!
 
 ## Usage
 
