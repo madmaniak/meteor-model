@@ -52,6 +52,9 @@ class @Minimongoid
   @create: (attributes) ->
     @new(attributes).save()
 
+  @first: (selector = {}, options = {}) ->
+    @_collection.findOne(selector, options)
+
   @where: (selector = {}, options = {}) ->
     @_collection.find(selector, options)
 
