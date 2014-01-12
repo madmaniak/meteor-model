@@ -6,6 +6,8 @@ Npm.depends({
   "inflection": "1.3.2"
 });
 
+var both = ['client', 'server'];
+
 Package.on_use(function (api) {
   api.use('coffeescript', both);
   api.add_files('lib/model.coffee', both);
