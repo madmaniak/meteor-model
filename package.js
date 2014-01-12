@@ -2,17 +2,17 @@ Package.describe({
   summary: "Models for Mongo collections elements"
 });
 
-Npm.depends({
-  "inflection": "1.3.2"
-});
-
 var both = ['client', 'server'];
+var model = [
+  'lib/model/deps/rubyjs.coffee',
+  'lib/model/deps/singularize.js',
+  'lib/model/base.coffee',
+  'lib/model/crud.coffee',
+  'lib/model/relations.coffee',
+  'lib/model.coffee'
+];
 
 Package.on_use(function (api) {
   api.use('coffeescript', both);
-  api.add_files('lib/model.coffee', both);
-});
-
-Package.on_test(function (api) {
-  api.add_files('tests/model_tests.coffee', both);
+  api.add_files(model, both);
 });
