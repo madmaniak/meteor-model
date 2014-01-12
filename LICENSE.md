@@ -1,9 +1,9 @@
-
 ## Copyright
 
 (The MIT license)
 
 Copyright (c) 2014 Marek Piasecki
+
 Copyright (c) 2013 Mario Uher
 
 Permission is hereby granted, free of charge, to any person obtaining
