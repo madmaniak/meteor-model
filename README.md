@@ -79,6 +79,16 @@ User.create name: 'Bob', age: 18 # => User
 User.create name: '' # => false
 ```
 
+### Looks great in Meteor Template usage, e. g.:
+
+```coffeescript
+  Template.groups.collection = -> Group.all()
+  Templage.users.collection = -> @.users()
+  
+  Template.users.events
+    'click .remove': -> @.destroy()
+```
+
 ## Notices
 
 Package under development. Good for prototyping. There is no tests, but code is short and easy. You can fix bugs and add new features yourself. You're welcome to contribute or reporting.
