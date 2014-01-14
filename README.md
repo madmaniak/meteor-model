@@ -2,6 +2,8 @@
 
 ## Installation
 
+Move your ```<body>``` to ```<template name='body'>```.
+
 ###Using meteorite
 
 ```
@@ -22,7 +24,8 @@ meteor add coffeescript
 ```coffeescript
 
 class User extends Model
-  @collection: new Meteor.Collection('users')
+  @set_collection()
+  
   @belongs_to 'group'
   
   isValid: ->
@@ -30,12 +33,14 @@ class User extends Model
     @age >= 18
     
 class Group extends Model
-  @collection: new Meteor.Collection('groups')
+  @set_collection()
   @has_many 'users'
   
 User.new(name: 'Bob', age: 18).save()
 
 ```
+
+```set_collection``` generates reference to mongo collection and ```Template.modelName.collection```.
 
 ### CRUD
 
@@ -48,10 +53,62 @@ User.new(name: 'Bob', age: 18).save()
 ```.create``` ,
 ```.destroy_all``` .
 
+#### actions straight from templates
+
+You can use ```create``` , ```.update``` , ```.destroy``` in html and it'll work out of the box. Demo in Haml (according to models from previous example):
+
+```haml
+%template{ name: :body }
+  {{> groups}}
+  
+%template{ name: :groups }
+  {{> new_group}}
+  
+  / collection is defined by Model
+  {{#each collection}}
+  {{> group}}
+  {{/each}}
+  
+%template{ name: :new_group }
+  / create class will trigger action
+  %form.create{ model: :Group }
+    %input{ name: :name }
+    %button{ type: :submit } Add group
+    
+%template{ name: :group }
+  %h1 {{name}}
+  / destroy class
+  .destroy Remove
+  {{> users}}
+  
+%template{ name: :users }
+  {{> new_user}}
+  
+  {{#each collection}}
+  {{> user}}
+  {{/each}}
+  
+%template{ name: :new_user }
+  %form.create{ model: :User }
+    %input{ name: :name }
+    %input{ name: :age }
+    %button{ type: :submit } Add user
+    
+%template{ name: :user }
+  %h2 {{name}}
+  {{age}}
+  .destroy Remove
+```
+
+### Hooks
+```.on_update``` ,
+```.on_destroy``` ,
+```.on_create``` .
+
 ### Relations
 
-```#belongs_to``` ,
-```#has_many``` :
+```.belongs_to``` ,
+```.has_many``` :
 
 ```coffeescript
 
@@ -63,6 +120,7 @@ group = Group.create name: 'G #3'
 user.group.set group # => Group
 
 group.users() # => Array[Group]
+group.users(name: 'Bob') # => Array[Group]
 
 #other
 
@@ -89,9 +147,10 @@ User.create name: '' # => false
     'click .remove': -> @.destroy()
 ```
 
+
 ## Notices
 
-Package under development. Good for prototyping. There is no tests, but code is short and easy. You can fix bugs and add new features yourself. You're welcome to contribute or reporting.
+Package under development. Proof of concept. Good for prototyping. There is no tests, but code is short and easy. You can fix bugs and add new features yourself. You're welcome to contribute or reporting.
 
 
 ## Contributing
