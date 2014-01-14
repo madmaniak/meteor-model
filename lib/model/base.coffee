@@ -2,6 +2,17 @@ class @ModelBase
 
   @collection: undefined
 
+  @collection_name: ->
+    pluralize @class()
+
+  @set_collection: ->
+    @collection = new Meteor.Collection @collection_name()
+    if Meteor.isClient
+      model = @
+      Template[@collection_name()].collection = ->
+        return @[model.collection_name()]() if @has_relation_with?(model)
+        model.all()
+
   constructor: (attributes = {}) ->
     @assignAttributes attributes
 

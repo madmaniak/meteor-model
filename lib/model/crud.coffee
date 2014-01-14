@@ -1,11 +1,13 @@
 class @ModelCRUD extends ModelBase
 
   update: (attributes) ->
+    @constructor.on_update?(attributes)
     @assignAttributes(attributes)
     @save()
 
   destroy: ->
     if @isPersisted()
+      @constructor.on_destroy?()
       @constructor.collection.remove @_id
       @_id = null
 
@@ -28,6 +30,7 @@ class @ModelCRUD extends ModelBase
     @_where(selector, options).count()
 
   @create: (attributes) ->
+    @on_create?(attributes)
     @new(attributes).save()
 
   @destroy_all: (selector = {}) ->
