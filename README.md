@@ -1,39 +1,98 @@
-#minimongoid
+#meteor-model
 
 ## Installation
 
-Download [minimongoid.coffee](https://github.com/madmaniak/minimongoid/blob/master/minimongoid.coffee) and place it in ```lib/```into your Meteor app.
+###Using meteorite
 
-Dont forget to install the `coffeescript` package:
+```
+mrt add model
+```
 
-```sh
+### Alternative (if something doesn't work)
+
+Copy whole ```lib/```into your Meteor app. 
+Install the `coffeescript` package:
+
+```
 meteor add coffeescript
 ```
 
-## Usage
+## Features
 
 ```coffeescript
 
-class User extends Minimongoid
+class User extends Model
+  @collection: new Meteor.Collection('users')
+  @belongs_to 'group'
+  
   isValid: ->
-    @attributes.name.length >= 3
+    @name.length >= 3 and \
+    @age >= 18
+    
+class Group extends Model
+  @collection: new Meteor.Collection('groups')
+  @has_many 'users'
+  
+User.new(name: 'Bob', age: 18).save()
 
-# Haters gonna hate!
-User.new(name: 'Bob').save()
-
-User.create name: 'Bob' # => User
-User.create name: '' # => false
-
-User.where(name: 'Bob').toArray() # => [User]
-
-User.count() # => 1
 ```
 
-Be sure to checkout the [implementation](https://github.com/haihappen/minimongoid/blob/master/minimongoid.coffee) for the full API.
+### CRUD
 
-## Testing
+```#update``` ,
+```#destroy``` ,
+```.first``` ,
+```.where``` ,
+```.all``` ,
+```.count``` ,
+```.create``` ,
+```.destroy_all``` .
 
-For now, you can test it using the meteor packages test suite. Copy the whole folder to your `/local/copy/of/meteor/packages` folder, and then run `../../meteor` from inside the `minimongoid` folder. Visit [localhost:3000](localhost:3000) to run the test suite. (Running the whole Meteor test suite isn't supported, cause minimongoid is implemented in CoffeeScript.)
+### Relations
+
+```#belongs_to``` ,
+```#has_many``` :
+
+```coffeescript
+
+user = User.first()
+user.group.new name: 'Group #2' # => Group
+user.group() # => Group
+
+group = Group.create name: 'G #3'
+user.group.set group # => Group
+
+group.users() # => Array[Group]
+
+#other
+
+group.users.new name: 'Username' # => User
+group.users.add User.first(name: 'Marek') # => User
+
+```
+
+### Validations
+
+```coffeescript
+
+User.create name: 'Bob', age: 18 # => User
+User.create name: '' # => false
+```
+
+### Looks great in Meteor Template usage, e. g.:
+
+```coffeescript
+  Template.groups.collection = -> Group.all()
+  Templage.users.collection = -> @.users()
+  
+  Template.users.events
+    'click .remove': -> @.destroy()
+```
+
+## Notices
+
+Package under development. Good for prototyping. There is no tests, but code is short and easy. You can fix bugs and add new features yourself. You're welcome to contribute or reporting.
+
 
 ## Contributing
 
