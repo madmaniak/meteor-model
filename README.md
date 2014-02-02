@@ -19,6 +19,13 @@ Install the `coffeescript` package:
 meteor add coffeescript
 ```
 
+### And it will not work - please use alternative version
+I've messed something up with packaging.
+Check usage demo here:
+[meteor-model-demo](https://github.com/madmaniak/meteor-model-demo)
+
+
+
 ## Features
 
 ```coffeescript
